@@ -13,3 +13,5 @@ keras>=3.0.0,<4.0.0           # Keras for building Neural Networks
 
 # Streamlit for UI
 streamlit>=1.20.0,<2.0.0       # Front-end web app framework
+
+beautifulsoup4>=4.12.0, <5.0.0 # Clean HTML data
