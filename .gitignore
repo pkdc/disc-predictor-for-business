@@ -176,4 +176,6 @@ cython_debug/
 *.csv
 
 # modules
-tfhub_modules/*
+tfhub_modules/
+
+model_data/
