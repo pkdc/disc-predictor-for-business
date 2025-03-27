@@ -3,6 +3,10 @@ import joblib
 import pandas as pd
 import numpy as np
 import os
+from utils.model_loader import load_model
+from utils.preprocess import clean_msg_body
+from utils.bert_embedder import get_bert_embeddings
+from utils.disc_labels import decode_disc_labels
 
 # Set page configuration - this changes the browser tab title
 st.set_page_config(
@@ -11,11 +15,23 @@ st.set_page_config(
     layout="wide"
 )
 
-# Load the neural network model
-## By loading the model once and reusing it, you avoid having multiple copies of the same model in memory.
-@st.cache_resource
-def load_model():
-    # Clear session again right before loading
-    return joblib.load("models/xgb_model.joblib")
-
 model = load_model()
+
+def make_prediction(input_text):
+    cleaned_text = clean_msg_body(input_text)
+    embeddings = get_bert_embeddings([cleaned_text])
+    result = model.predict(embeddings)
+    disc_labels = decode_disc_labels(result)
+    return disc_labels[0]
+
+st.title("DISC Personality Prediction Model")
+
+st.write("This model predicts the DISC personality type based on the text input.")
+
+input_data = st.text_area("Enter the text to predict the DISC personality type:")
+
+if st.button('Predict'):
+    prediction = make_prediction(input_data)
+    st.write("Predicted DISC personality type:", prediction)
+else:
+    st.write("Please enter the text and click the 'Predict' button to see the prediction.")
