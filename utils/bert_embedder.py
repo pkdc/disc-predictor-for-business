@@ -8,7 +8,7 @@ import os
 # bert_encoder = hub.KerasLayer(os.path.join(base_dir, "..", "tfhub_modules", "bert_encoder"), trainable=False)
 
 bert_preprocess = hub.KerasLayer("https://tfhub.dev/tensorflow/bert_en_uncased_preprocess/3", trainable=False)
-bert_encoder = hub.KerasLayer("https://tfhub.dev/tensorflow/bert_en_uncased_L-12_H-768_A-12/3")
+bert_encoder = hub.KerasLayer("https://tfhub.dev/tensorflow/bert_en_uncased_L-12_H-768_A-12/3", trainable=False)
 
 def get_bert_embeddings(texts):
     text_inputs = tf.constant(texts)
