@@ -11,7 +11,7 @@ from utils.disc_labels import decode_disc_labels
 # Set page configuration - this changes the browser tab title
 st.set_page_config(
     page_title="DISC Personality Prediction Model",
-    page_icon="🧊",
+    page_icon="😎",
     layout="wide"
 )
 
