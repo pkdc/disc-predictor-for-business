@@ -7,6 +7,16 @@ from utils.model_loader import load_model
 from utils.preprocess import clean_msg_body
 from utils.bert_embedder import get_bert_embeddings
 from utils.disc_labels import decode_disc_labels
+import tensorflow as tf
+
+# Restrict TensorFlow's memory usage
+gpus = tf.config.experimental.list_physical_devices("GPU")
+if gpus:
+    try:
+        for gpu in gpus:
+            tf.config.experimental.set_memory_growth(gpu, True)
+    except RuntimeError as e:
+        print(e)
 
 # Set page configuration - this changes the browser tab title
 st.set_page_config(
