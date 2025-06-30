@@ -2,6 +2,7 @@
 pandas>=1.5.3,<3.0.0          # Data manipulation
 numpy>=1.24.2,<2.0.0           # Numerical computing
 matplotlib>=3.7.1,<4.0.0       # Data visualization
+seaborn>=0.12.2,<1.0.0         # Statistical data visualization
 
 # Machine Learning & NLP
 scikit-learn>=1.2.2,<2.0.0     # ML models (Logistic Regression, SVM)
