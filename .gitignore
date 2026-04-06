@@ -179,3 +179,11 @@ cython_debug/
 tfhub_modules/
 
 model_data/
+
+*.md
+!README.md
+
+_plans
+_reports
+_specs
+.claude
