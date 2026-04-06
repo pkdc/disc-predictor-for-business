@@ -2,11 +2,12 @@ import re
 import quopri
 from bs4 import BeautifulSoup
 
-email_endings = ['best regards', 'regards', 'best', 'All the best', 'sincerely', 'cheers', 'thanks',
+email_endings = ['best regards', 'regards', 'all the best', 'sincerely', 'cheers',
                 'thank you', 'warm regards', 'yours truly', 'yours sincerely', 'yours faithfully',
                 'yours', 'kind regards', 'cordially', 'respectfully', 'with regards', 'with best regards',
-                  'with warm regards', 'with sincere regards', 'with gratitude', 'with appreciation', 'with thanks',
-                    'with warmest regards', 'with deepest gratitude', 'with deepest appreciation', 'with deepest thanks']
+                'with warm regards', 'with sincere regards', 'with gratitude', 'with appreciation', 'with thanks',
+                'with warmest regards', 'with deepest gratitude', 'with deepest appreciation', 'with deepest thanks',
+                'thanks and regards', 'many thanks']
 escaped_endings = [re.escape(endings) for endings in email_endings]
 
 common_signature = ['Enron North America Corp.', 'Carol St. Clair', 'Debra Perlingiere', 'Keegan Farrell', 'Eric Bass']
@@ -16,8 +17,8 @@ escaped_signature = [re.escape(sig) for sig in common_signature]
 IMAGE_PATTERN = re.compile(r'\[IMAGE\]')
 URL_PATTERN = re.compile(r'https?://\S+|www\.\S+')
 FILE_PATTERN = re.compile(r'[-|\s]?[a-zA-Z0-9_-]+\.(?:txt|pdf|docx?|xlsx?|pptx?|csv)')
-PHONE_NUM_START_PATTERN = re.compile(r'(?i)^\s*(?:\(?(phone|fax|mobile|mob|tel|office)\)?:?\s*)?(?:\+?\d{1,3}[\s\-]?)?\d{2,4}[\s\-]?\d{3}[\s\-]?\d{4}[\s\S]*$')
-EMAIL_SIGNOFF_PATTERN = re.compile(r'(?im)^\s*(?:' + "|".join(escaped_endings) + r')[\s\S]*')
+PHONE_NUM_START_PATTERN = re.compile(r'(?im)^\s*(?:\(?(phone|fax|mobile|mob|tel|office)\)?:?\s*)?(?:\+?\d{1,3}[\s\-]?)?\d{2,4}[\s\-]?\d{3}[\s\-]?\d{4}\s*$')
+EMAIL_SIGNOFF_PATTERN = re.compile(r'(?im)^\s*(?:' + "|".join(escaped_endings) + r')\s*[,.]?\s*$.*', re.DOTALL)
 EMAIL_SIGNATURE_PATTERN = re.compile(r'(?im)^\s*(?:' + "|".join(escaped_signature) + r')[\s\S]*')
 EMAIL_HEADER_PATTERN = re.compile(r'(?:Subject|To|Cc|Bcc|From|Sent|Content-Type|Content-Transfer-Encoding|MIME-Version):\s+.*\n', re.IGNORECASE)
 PRICE_MASK_PATTERN = re.compile(r'\$\d+(?:\.\d{1,2})?(?:\s*[-\u2013*]\s*\$\d+(?:\.\d{1,2})?)?')
