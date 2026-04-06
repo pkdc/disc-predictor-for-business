@@ -186,4 +186,4 @@ model_data/
 _plans
 _reports
 _specs
-.claude
+.claude**/.DS_Store
