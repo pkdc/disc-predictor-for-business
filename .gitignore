@@ -187,3 +187,5 @@ _plans
 _reports
 _specs
 .claude**/.DS_Store
+
+streamlit_app.py
