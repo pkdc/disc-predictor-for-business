@@ -21,15 +21,14 @@ FORWARD_PATTERN = re.compile(
     re.IGNORECASE,
 )
 
-ml_model = None
-
+ml_model = {}
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Load the model once at startup."""
-    global ml_model
-    ml_model = load_model()
+    ml_model["disc"] = load_model()
     yield
+    ml_model.clear() # Clear model from memory on shutdown
 
 
 app = FastAPI(
@@ -63,7 +62,7 @@ def predict(req: PredictRequest):
     has_forward = bool(FORWARD_PATTERN.search(req.text))
 
     embeddings = get_bert_embeddings([cleaned_text])
-    result = ml_model.predict(embeddings)
+    result = ml_model["disc"].predict(embeddings)
     disc_labels = list(decode_disc_labels(result)[0])
 
     return PredictResponse(
