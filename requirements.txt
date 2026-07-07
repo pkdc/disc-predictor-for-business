@@ -8,7 +8,7 @@ seaborn>=0.12.2,<1.0.0         # Statistical data visualization
 scikit-learn>=1.2.2,<2.0.0     # ML models (Logistic Regression, SVM)
 
 # BERT Embeddings with TensorFlow/Keras
-transformers>=4.27.4,<5.0.0    # Hugging Face Transformers (no PyTorch)
+
 tensorflow>=2.16.1,<3.0.0      # Backend for Keras
 keras>=3.0.0,<4.0.0           # Keras for building Neural Networks
 tensorflow-text>=2.7.0,<3.0.0  # Text preprocessing
